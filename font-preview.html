@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Font preview — To The Moon</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Sora:wght@400;600&family=Orbitron:wght@600;800&family=Rajdhani:wght@500;700&family=Chakra+Petto&family=Exo+2:wght@400;600&family=Bebas+Neue&family=Inter:wght@400;500&family=Syne:wght@600;800&family=Sora:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0b0e1a;
+    --ink: #f3f1ea;
+    --ink-dim: #a9adc4;
+    --gold: #e8c77a;
+    --line: #2a2f52;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Sora', sans-serif;
+    padding: 40px 20px 100px;
+  }
+  .stars {
+    position: fixed; inset: 0; z-index: -1; opacity: .4;
+    background:
+      radial-gradient(1.5px 1.5px at 20% 30%, var(--ink) 50%, transparent 50%),
+      radial-gradient(1px 1px at 70% 15%, var(--ink) 50%, transparent 50%),
+      radial-gradient(1.5px 1.5px at 85% 60%, var(--ink) 50%, transparent 50%),
+      radial-gradient(1px 1px at 40% 80%, var(--ink) 50%, transparent 50%),
+      radial-gradient(1.5px 1.5px at 10% 65%, var(--ink) 50%, transparent 50%),
+      radial-gradient(1px 1px at 55% 45%, var(--ink) 50%, transparent 50%),
+      radial-gradient(1.5px 1.5px at 92% 25%, var(--ink) 50%, transparent 50%);
+  }
+  h1.page-title {
+    text-align: center;
+    font-family: 'Sora', sans-serif;
+    font-weight: 600;
+    font-size: 1.3rem;
+    color: var(--ink-dim);
+    margin-bottom: 48px;
+  }
+  .option {
+    max-width: 760px;
+    margin: 0 auto 64px;
+    padding: 40px clamp(20px,5vw,56px);
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    background: color-mix(in srgb, var(--bg) 60%, transparent);
+    text-align: center;
+  }
+  .option .label {
+    display: inline-block;
+    font-size: .74rem;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 600;
+    border: 1px solid color-mix(in srgb, var(--gold) 50%, transparent);
+    padding: 4px 12px;
+    border-radius: 999px;
+    margin-bottom: 28px;
+  }
+  .option .wordmark {
+    line-height: .95;
+    margin-bottom: 18px;
+  }
+  .option .fonts-used {
+    font-size: .8rem;
+    color: var(--ink-dim);
+    margin-top: 20px;
+  }
+  .option .sample-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 28px;
+    padding-top: 20px;
+    border-top: 1px solid var(--line);
+    font-size: .95rem;
+  }
+  .option .sample-nav .links { display:flex; gap: 22px; color: var(--ink-dim); font-size:.85rem; }
+
+  /* OPTION A — Orbitron + Rajdhani, full neon glow */
+  .optA .wordmark {
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 800;
+    font-size: clamp(2.2rem, 7vw, 3.6rem);
+    color: #e8f6ff;
+    text-shadow:
+      0 0 6px #8fd8ff,
+      0 0 18px #4fb8ff,
+      0 0 36px #2a8fe0,
+      0 0 60px color-mix(in srgb, var(--gold) 70%, transparent);
+    letter-spacing: .04em;
+  }
+  .optA .sample-nav { font-family: 'Rajdhani', sans-serif; font-weight: 700; }
+  .optA .brand-sample { font-family:'Orbitron',sans-serif; font-weight:700; text-shadow: 0 0 10px #4fb8ff; }
+
+  /* OPTION B — Chakra Petch, subtle tech glow (gold) */
+  .optB .wordmark {
+    font-family: 'Chakra Petch', sans-serif;
+    font-weight: 700;
+    font-size: clamp(2.2rem, 7vw, 3.6rem);
+    color: var(--ink);
+    text-shadow: 0 0 10px color-mix(in srgb, var(--gold) 65%, transparent), 0 0 28px color-mix(in srgb, var(--gold) 35%, transparent);
+    letter-spacing: .01em;
+  }
+  .optB .sample-nav { font-family: 'Exo 2', sans-serif; font-weight: 600; }
+  .optB .brand-sample { font-family:'Chakra Petch',sans-serif; font-weight:600; }
+
+  /* OPTION C — current fonts, glow added */
+  .optC .wordmark {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: clamp(2.2rem, 7vw, 3.6rem);
+    color: var(--ink);
+    text-shadow: 0 0 14px color-mix(in srgb, var(--gold) 55%, transparent), 0 0 30px color-mix(in srgb, var(--gold) 25%, transparent);
+  }
+  .optC .sample-nav { font-family: 'Sora', sans-serif; font-weight: 600; }
+  .optC .brand-sample { font-family:'Space Grotesk',sans-serif; font-weight:700; }
+
+  /* OPTION D — Bebas Neue poster style, no neon */
+  .optD .wordmark {
+    font-family: 'Bebas Neue', sans-serif;
+    font-weight: 400;
+    font-size: clamp(2.6rem, 8vw, 4.4rem);
+    color: var(--ink);
+    letter-spacing: .06em;
+  }
+  .optD .sample-nav { font-family: 'Inter', sans-serif; font-weight: 500; }
+  .optD .brand-sample { font-family:'Bebas Neue',sans-serif; font-weight:400; letter-spacing:.04em; }
+
+  /* OPTION E — Syne, bold editorial + soft gold glow */
+  .optE .wordmark {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: clamp(2.2rem, 7vw, 3.6rem);
+    color: var(--ink);
+    text-shadow: 0 2px 0 color-mix(in srgb, var(--gold) 70%, transparent);
+  }
+  .optE .sample-nav { font-family: 'Sora', sans-serif; font-weight: 600; }
+  .optE .brand-sample { font-family:'Syne',sans-serif; font-weight:800; }
+</style>
+</head>
+<body>
+<div class="stars"></div>
+<h1 class="page-title">Anteprima font — scegli lo stile per "To The Moon"</h1>
+
+<div class="option optA">
+  <span class="label">Opzione A</span>
+  <div class="wordmark">TO THE<br>MOON</div>
+  <p class="fonts-used">Titoli: Orbitron (sci-fi, neon blu/oro) · Testo: Rajdhani</p>
+  <div class="sample-nav">
+    <span class="brand-sample">To The Moon</span>
+    <span class="links">Programma&nbsp;&nbsp;Candidati&nbsp;&nbsp;Contatti</span>
+  </div>
+</div>
+
+<div class="option optB">
+  <span class="label">Opzione B</span>
+  <div class="wordmark">TO THE<br>MOON</div>
+  <p class="fonts-used">Titoli: Chakra Petch (tech, glow oro soft) · Testo: Exo 2</p>
+  <div class="sample-nav">
+    <span class="brand-sample">To The Moon</span>
+    <span class="links">Programma&nbsp;&nbsp;Candidati&nbsp;&nbsp;Contatti</span>
+  </div>
+</div>
+
+<div class="option optC">
+  <span class="label">Opzione C — minimo cambiamento</span>
+  <div class="wordmark">TO THE<br>MOON</div>
+  <p class="fonts-used">Font attuali (Space Grotesk / Sora) + bagliore oro aggiunto</p>
+  <div class="sample-nav">
+    <span class="brand-sample">To The Moon</span>
+    <span class="links">Programma&nbsp;&nbsp;Candidati&nbsp;&nbsp;Contatti</span>
+  </div>
+</div>
+
+<div class="option optD">
+  <span class="label">Opzione D — poster, senza neon</span>
+  <div class="wordmark">TO THE<br>MOON</div>
+  <p class="fonts-used">Titoli: Bebas Neue (condensato, da manifesto) · Testo: Inter</p>
+  <div class="sample-nav">
+    <span class="brand-sample">To The Moon</span>
+    <span class="links">Programma&nbsp;&nbsp;Candidati&nbsp;&nbsp;Contatti</span>
+  </div>
+</div>
+
+<div class="option optE">
+  <span class="label">Opzione E — editoriale</span>
+  <div class="wordmark">TO THE<br>MOON</div>
+  <p class="fonts-used">Titoli: Syne (bold, moderno) · Testo: Sora</p>
+  <div class="sample-nav">
+    <span class="brand-sample">To The Moon</span>
+    <span class="links">Programma&nbsp;&nbsp;Candidati&nbsp;&nbsp;Contatti</span>
+  </div>
+</div>
+
+</body>
+</html>

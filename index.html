@@ -1,0 +1,923 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>To The Moon — Lista 1</title>
+<!-- Full-screen "app" mode when saved to the Home Screen (no effect in normal browsing — Safari's own address bar can't be hidden otherwise) -->
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="To The Moon">
+<meta name="theme-color" content="#0b0e1a">
+<meta name="description" content="Lista 1 — To The Moon. Candidati rappresentanti d'istituto, Liceo Cristoforo Colombo, Marigliano e San Vitaliano.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;600;700;800;900&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  /*
+    Layout concept: a vertical "mission trajectory" — a dotted launch line runs down
+    the page connecting Hero (launch) -> Programma (mission objectives, numbered like
+    flight-plan steps) -> Candidati (crew roster) -> Contatti (mission control).
+    Palette pulls directly from the provided moon logo: deep space navy, warm moon-grey,
+    starlight white, and a soft gold accent for "punta alla luna".
+  */
+  :root {
+    --bg: #0b0e1a;
+    --bg-alt: #11152600;
+    --surface: #141830;
+    --surface-2: #1b2040;
+    --moon: #d9d2c4;
+    --moon-dim: #9a9488;
+    --ink: #f3f1ea;
+    --ink-dim: #a9adc4;
+    --gold: #e8c77a;
+    --gold-dim: #8a7850;
+    --line: #2a2f52;
+    --rocket: #f3f1ea;
+  }
+  @media (prefers-color-scheme: light) {
+    :root:not([data-theme="dark"]) {
+      --bg: #f3f1ea;
+      --surface: #ffffff;
+      --surface-2: #eceade;
+      --moon: #3a3f55;
+      --moon-dim: #6b6f85;
+      --ink: #14172a;
+      --ink-dim: #4b4f6a;
+      --gold: #9c7a2e;
+      --gold-dim: #c9a855;
+      --line: #d8d4c4;
+      color-scheme: light;
+    }
+  }
+  :root[data-theme="light"] {
+    --bg: #f3f1ea;
+    --surface: #ffffff;
+    --surface-2: #eceade;
+    --moon: #3a3f55;
+    --moon-dim: #6b6f85;
+    --ink: #14172a;
+    --ink-dim: #4b4f6a;
+    --gold: #9c7a2e;
+    --gold-dim: #c9a855;
+    --line: #d8d4c4;
+    color-scheme: light;
+  }
+  :root[data-theme="dark"] { color-scheme: dark; }
+
+  * { box-sizing: border-box; }
+  .visually-hidden {
+    position: absolute;
+    width: 1px; height: 1px;
+    padding: 0; margin: -1px;
+    overflow: hidden;
+    clip: rect(0,0,0,0);
+    white-space: nowrap;
+    border: 0;
+  }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Rajdhani', system-ui, sans-serif;
+    line-height: 1.5;
+    overflow-x: hidden;
+  }
+  ::selection { background: var(--gold); color: #14172a; }
+
+  h1, h2, h3, .display {
+    font-family: 'Orbitron', system-ui, sans-serif;
+    text-wrap: balance;
+    margin: 0;
+  }
+
+  a { color: inherit; }
+
+  .wrap {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding-inline: clamp(18px, 5vw, 48px);
+  }
+
+  /* starfield background */
+  .stars {
+    position: fixed;
+    inset: 0;
+    z-index: -1;
+    background:
+      radial-gradient(1.5px 1.5px at 20% 30%, var(--ink) 50%, transparent 50%),
+      radial-gradient(1px 1px at 70% 15%, var(--ink) 50%, transparent 50%),
+      radial-gradient(1.5px 1.5px at 85% 60%, var(--ink) 50%, transparent 50%),
+      radial-gradient(1px 1px at 40% 80%, var(--ink) 50%, transparent 50%),
+      radial-gradient(1.5px 1.5px at 10% 65%, var(--ink) 50%, transparent 50%),
+      radial-gradient(1px 1px at 55% 45%, var(--ink) 50%, transparent 50%),
+      radial-gradient(1.5px 1.5px at 92% 25%, var(--ink) 50%, transparent 50%),
+      radial-gradient(1px 1px at 30% 10%, var(--ink) 50%, transparent 50%);
+    opacity: .35;
+  }
+  .page-bg {
+    position: relative;
+  }
+  .page-bg > section {
+    position: relative;
+    z-index: 1;
+  }
+  @media (max-width: 899px) {
+    .page-bg {
+      background-color: var(--bg);
+    }
+    .page-bg::before {
+      /* image tiles every 296.84vw (its own height/width ratio), and a matching
+         dark gradient repeats at the exact same height so it always lands right
+         on the seam between one copy and the next, blending them together.
+         It's a separate, blurred layer so the blur never touches the text. */
+      content: "";
+      position: absolute;
+      inset: -30px;
+      z-index: 0;
+      background-image:
+        linear-gradient(180deg, var(--bg) 0%, transparent 14%, transparent 86%, var(--bg) 100%),
+        url('sfondotothemoon.png');
+      background-repeat: repeat-y, repeat-y;
+      background-position: top center, top center;
+      background-size: 100% 296.84vw, 100% 296.84vw;
+      filter: blur(7px);
+    }
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: env(safe-area-inset-top, 0px);
+    left: 0;
+    right: 0;
+    z-index: 20;
+    background: transparent;
+    border-bottom: 1px solid transparent;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .3s ease, background .3s ease, border-color .3s ease, backdrop-filter .3s ease;
+  }
+  nav.scrolled {
+    opacity: 1;
+    pointer-events: auto;
+    backdrop-filter: blur(10px);
+    background: color-mix(in srgb, var(--bg) 78%, transparent);
+    border-bottom: 1px solid var(--line);
+  }
+  @media (min-width: 900px) {
+    nav { opacity: 1; pointer-events: auto; }
+  }
+  nav:not(.scrolled) .navlinks a {
+    text-shadow: 0 1px 10px color-mix(in srgb, var(--bg) 85%, transparent), 0 1px 2px color-mix(in srgb, var(--bg) 95%, transparent), 0 0 8px color-mix(in srgb, #8fd8ff 45%, transparent);
+  }
+  nav:not(.scrolled) .brand {
+    text-shadow: 0 1px 10px color-mix(in srgb, var(--bg) 85%, transparent), 0 0 4px #8fd8ff, 0 0 9px color-mix(in srgb, #4fb8ff 70%, transparent);
+  }
+  .nav-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding-block: 14px;
+  }
+  @media (min-width: 900px) {
+    .nav-inner { max-width: none; padding-inline: clamp(24px, 4vw, 56px); }
+  }
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 700;
+    letter-spacing: .02em;
+    font-size: 1.05rem;
+    text-decoration: none;
+    color: #eaf6ff;
+    text-shadow: 0 0 4px #8fd8ff, 0 0 9px color-mix(in srgb, #4fb8ff 70%, transparent);
+  }
+  .brand .tag {
+    font-size: .62rem;
+    font-weight: 600;
+    letter-spacing: .14em;
+    color: var(--gold);
+    background: color-mix(in srgb, var(--bg) 55%, transparent);
+    border: 1px solid var(--gold-dim);
+    padding: 3px 7px;
+    border-radius: 999px;
+  }
+  .navlinks { display: flex; gap: clamp(10px, 2vw, 26px); list-style: none; margin: 0; padding: 0; font-size: .86rem; }
+  .navlinks a { text-decoration: none; color: var(--ink-dim); transition: color .2s ease; text-shadow: 0 0 6px color-mix(in srgb, #8fd8ff 35%, transparent); }
+  .navlinks a:hover { color: var(--gold); }
+  .navlinks li { white-space: nowrap; }
+
+  /* HERO */
+  .hero {
+    position: relative;
+    z-index: 0;
+    padding-top: calc(clamp(28px, 6vw, 48px) + env(safe-area-inset-top, 0px));
+    padding-bottom: calc(clamp(28px, 6vw, 48px) + env(safe-area-inset-bottom, 0px));
+    min-height: 100vh;
+    min-height: 100dvh;
+    display: flex;
+    align-items: stretch;
+    text-align: center;
+    overflow: hidden;
+  }
+  .hero > .wrap { width: 100%; max-width: none; padding-inline: clamp(20px, 4vw, 64px); }
+  .hero-content {
+    max-width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  .hero-sub { display: none; }
+  .hero-video {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 35%;
+    z-index: -3;
+    filter: saturate(1.08) contrast(1.02);
+  }
+  @media (min-width: 900px) {
+    .hero { text-align: left; align-items: center; padding-block: clamp(96px, 12vw, 120px) clamp(48px, 8vw, 64px); }
+    .hero-content { max-width: 420px; height: auto; display: block; }
+    .hero-video { object-position: center center; transform: none; }
+    .hero-glow { left: 16%; }
+    .eyebrow::before { display: none; }
+    .hero-sub { display: block; margin-inline: 0; }
+    .hero-cta { justify-content: flex-start; }
+    .hero-video-overlay::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, var(--bg) 0%, color-mix(in srgb, var(--bg) 55%, transparent) 28%, transparent 56%);
+    }
+  }
+  .hero-video-overlay {
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+    background: linear-gradient(180deg, transparent 0%, transparent 55%, var(--bg) 100%);
+  }
+  .hero-glow {
+    position: absolute;
+    left: 50%; top: 10%;
+    width: 560px; height: 560px;
+    transform: translateX(-50%);
+    background: radial-gradient(circle, color-mix(in srgb, var(--gold) 16%, transparent) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: -1;
+  }
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: .78rem;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 600;
+    margin-bottom: 20px;
+  }
+  .eyebrow::before, .eyebrow::after {
+    content: "";
+    width: 22px; height: 1px;
+    background: var(--gold-dim);
+  }
+  .hero h1 {
+    font-size: clamp(3rem, 11vw, 7rem);
+    font-weight: 700;
+    letter-spacing: -.02em;
+    line-height: .96;
+    color: var(--ink);
+    text-shadow: 0 2px 24px color-mix(in srgb, var(--bg) 80%, transparent), 0 1px 3px color-mix(in srgb, var(--bg) 90%, transparent);
+  }
+  .hero h1 .moonword {
+    display: block;
+    color: var(--moon);
+    -webkit-text-stroke: 1px var(--gold-dim);
+    font-size: clamp(3.4rem, 13vw, 8.4rem);
+  }
+  .hero-sub {
+    max-width: 560px;
+    margin: 22px auto 0;
+    color: var(--ink-dim);
+    font-size: clamp(1rem, 2vw, 1.15rem);
+  }
+  .hero-motto {
+    margin-top: 30px;
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 600;
+    font-style: italic;
+    font-size: clamp(1.1rem, 2.6vw, 1.45rem);
+    color: var(--gold);
+  }
+  .hero-cta {
+    display: flex;
+    gap: 14px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 40px;
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 13px 26px;
+    border-radius: 999px;
+    font-weight: 600;
+    font-size: .92rem;
+    text-decoration: none;
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: transform .15s ease, box-shadow .15s ease;
+  }
+  .btn:hover { transform: translateY(-2px); }
+  .btn-primary { background: var(--gold); color: #14172a; box-shadow: 0 8px 24px color-mix(in srgb, var(--gold) 35%, transparent); }
+  .btn-ghost { background: transparent; color: var(--ink); border-color: var(--line); }
+
+  .list-badge {
+    margin: 56px auto 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+    padding: 10px 20px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    font-size: .85rem;
+    color: var(--ink-dim);
+  }
+  .list-badge b { color: var(--ink); font-family: 'Orbitron', sans-serif; }
+  .list-badge .num {
+    width: 26px; height: 26px;
+    border-radius: 50%;
+    background: var(--gold);
+    color: #14172a;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: .8rem;
+  }
+
+  /* trajectory line */
+  .trajectory {
+    position: relative;
+  }
+  .trajectory::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 0; bottom: 0;
+    width: 1px;
+    background: repeating-linear-gradient(to bottom, var(--line) 0 6px, transparent 6px 14px);
+    transform: translateX(-50%);
+    z-index: -1;
+  }
+
+  section { padding-block: clamp(48px, 9vw, 100px); scroll-margin-top: 72px; }
+
+  .section-head {
+    text-align: center;
+    margin-bottom: clamp(36px, 6vw, 64px);
+  }
+  .section-head .k {
+    display: block;
+    font-size: .76rem;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 600;
+    margin-bottom: 12px;
+  }
+  .section-head h2 {
+    font-size: clamp(1.8rem, 4.4vw, 2.8rem);
+    font-weight: 700;
+  }
+  .section-head p {
+    max-width: 540px;
+    margin: 14px auto 0;
+    color: var(--ink-dim);
+    font-size: .98rem;
+  }
+
+  /* PROGRAMMA */
+  .programma-list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .punto {
+    background: color-mix(in srgb, var(--surface) 55%, transparent);
+    backdrop-filter: blur(6px);
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    overflow: hidden;
+    transition: background .2s ease, border-color .2s ease;
+  }
+  .punto:hover { border-color: var(--gold-dim); }
+  .punto[open] {
+    background: color-mix(in srgb, var(--surface) 92%, transparent);
+  }
+  .punto summary {
+    list-style: none;
+    cursor: pointer;
+    display: grid;
+    grid-template-columns: 48px 1fr 20px;
+    gap: 18px;
+    align-items: center;
+    padding: 20px clamp(18px, 3vw, 28px);
+  }
+  .punto summary::-webkit-details-marker { display: none; }
+  .punto .idx {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--gold-dim);
+    font-variant-numeric: tabular-nums;
+  }
+  .punto h3 {
+    font-size: 1.04rem;
+    font-weight: 600;
+  }
+  .punto .chevron {
+    width: 20px; height: 20px;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--gold);
+    transition: transform .25s ease;
+  }
+  .punto[open] .chevron { transform: rotate(180deg); }
+  .punto .body {
+    padding: 0 clamp(18px, 3vw, 28px) 22px calc(48px + 18px);
+  }
+  .punto p {
+    color: var(--ink-dim);
+    font-size: .92rem;
+    margin: 0 0 10px;
+  }
+  .punto .refs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .chip {
+    font-size: .74rem;
+    font-weight: 600;
+    color: var(--gold);
+    background: color-mix(in srgb, var(--gold) 12%, transparent);
+    border: 1px solid var(--gold-dim);
+    border-radius: 999px;
+    padding: 4px 10px;
+  }
+  @media (max-width: 560px) {
+    .punto summary { grid-template-columns: 30px 1fr 18px; gap: 12px; padding: 16px; }
+    .punto .idx { font-size: 1.1rem; }
+    .punto .body { padding: 0 16px 18px calc(30px + 12px); }
+  }
+
+  /* CANDIDATI */
+  .capolista-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 20px;
+    margin-bottom: 20px;
+  }
+  .crew-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+  @media (max-width: 720px) {
+    .crew-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 480px) {
+    .crew-grid { grid-template-columns: 1fr; }
+  }
+  .crew-card {
+    background: color-mix(in srgb, var(--surface) 45%, transparent);
+    backdrop-filter: blur(8px);
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    padding: 26px 20px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .crew-card .avatar {
+    width: 72px; height: 72px;
+    margin: 0 auto 16px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 700;
+    font-size: 1.3rem;
+    color: #14172a;
+    background: radial-gradient(circle at 32% 28%, var(--moon) 0%, var(--moon-dim) 72%);
+    box-shadow: inset -6px -6px 14px rgba(0,0,0,.25), 0 0 0 3px color-mix(in srgb, var(--gold) 30%, transparent);
+  }
+  .crew-card h3 { font-size: 1.02rem; font-weight: 600; margin-bottom: 4px; }
+  .crew-card .role {
+    font-size: .74rem;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 600;
+    margin-bottom: 12px;
+    display: block;
+  }
+  .crew-card .topics {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    justify-content: center;
+  }
+  .crew-card .topics span {
+    font-size: .7rem;
+    color: var(--ink-dim);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 3px 9px;
+  }
+  .crew-card.capolista {
+    border-color: var(--gold-dim);
+    background: linear-gradient(180deg, color-mix(in srgb, var(--gold) 10%, var(--surface) 45%) 0%, color-mix(in srgb, var(--surface) 45%, transparent) 60%);
+    backdrop-filter: blur(8px);
+    padding: 36px 28px;
+  }
+  .crew-card.capolista .avatar {
+    width: 104px; height: 104px;
+    box-shadow: inset -6px -6px 14px rgba(0,0,0,.25), 0 0 0 3px var(--gold);
+    font-size: 1.8rem;
+  }
+  .crew-card.capolista h3 { font-size: 1.22rem; }
+  .crew-card .crown {
+    display: none;
+  }
+  .crew-card.capolista .crown {
+    display: inline-block;
+    font-size: .68rem;
+    font-weight: 700;
+    letter-spacing: .08em;
+    color: var(--gold);
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .crew-card.capolista .role { color: var(--ink); }
+
+  /* MOTTO BAND */
+  .motto-band {
+    text-align: center;
+    padding-block: clamp(50px, 9vw, 90px);
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+  .motto-band p {
+    font-family: 'Orbitron', sans-serif;
+    font-size: clamp(1.4rem, 4.2vw, 2.4rem);
+    font-weight: 600;
+    max-width: 760px;
+    margin: 0 auto;
+    color: var(--ink);
+  }
+  .motto-band p b { color: var(--gold); }
+
+  /* CONTATTI */
+  .contatti {
+    text-align: center;
+  }
+  .ig-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 22px;
+    padding: 14px 28px;
+    border-radius: 999px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    font-weight: 600;
+    text-decoration: none;
+    font-size: .95rem;
+  }
+  .ig-link:hover { border-color: var(--gold-dim); }
+
+  footer {
+    text-align: center;
+    padding: 36px 18px calc(28px + env(safe-area-inset-bottom, 0px));
+    color: var(--ink-dim);
+    font-size: .78rem;
+    border-top: 1px solid var(--line);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .reveal { animation: rise .7s ease both; }
+  }
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(14px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @media (max-width: 899px) {
+    /* tighter rhythm so the content stays within one pass of the background image */
+    section { padding-block: 32px; }
+    .section-head { margin-bottom: 24px; }
+    .programma-list { gap: 10px; }
+    .punto summary { padding: 14px 16px; gap: 12px; }
+    .punto .body { padding-bottom: 14px; }
+    .capolista-grid { gap: 12px; margin-bottom: 12px; }
+    .crew-grid { gap: 10px; }
+    .crew-card { padding: 18px 16px; }
+  }
+</style>
+</head>
+<body>
+<script>
+  (function () {
+    function viewportHeight() {
+      return (window.visualViewport ? window.visualViewport.height : window.innerHeight);
+    }
+    function setHeroHeight() {
+      var hero = document.querySelector('.hero');
+      if (!hero) return;
+      hero.style.height = viewportHeight() + 'px';
+    }
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', setHeroHeight);
+    } else {
+      setHeroHeight();
+    }
+    window.addEventListener('resize', setHeroHeight);
+    window.addEventListener('orientationchange', function () {
+      setTimeout(setHeroHeight, 50);
+    });
+    window.addEventListener('load', setHeroHeight);
+    if (window.visualViewport) {
+      window.visualViewport.addEventListener('resize', setHeroHeight);
+      window.visualViewport.addEventListener('scroll', setHeroHeight);
+    }
+    /* Safari's own toolbar can settle its final size a moment after load,
+       without always firing a resize event — recheck a few times early on. */
+    [50, 150, 300, 600, 1000, 1500, 2500].forEach(function (ms) {
+      setTimeout(setHeroHeight, ms);
+    });
+  })();
+</script>
+<div class="stars"></div>
+
+<nav id="siteNav">
+  <div class="wrap nav-inner">
+    <a href="#top" class="brand">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="12" cy="12" r="9" fill="var(--moon)" stroke="var(--gold)" stroke-width="1"/>
+        <circle cx="9" cy="9" r="1.4" fill="var(--moon-dim)"/>
+        <circle cx="14.5" cy="13" r="2" fill="var(--moon-dim)"/>
+      </svg>
+      To The Moon
+      <span class="tag">LISTA 1</span>
+    </a>
+    <ul class="navlinks">
+      <li><a href="#programma">Programma</a></li>
+      <li><a href="#candidati">Candidati</a></li>
+      <li><a href="#contatti">Contatti</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main id="top">
+  <header class="hero">
+    <video class="hero-video" id="heroVideo" autoplay muted loop playsinline>
+      <source src="hero-moon-desktop.mp4" type="video/mp4" media="(min-width: 768px)">
+      <source src="hero-moon-mobile.mp4" type="video/mp4">
+    </video>
+    <div class="hero-video-overlay" id="heroVideoOverlay"></div>
+    <div class="hero-glow"></div>
+    <div class="wrap">
+      <div class="hero-content">
+        <h1 class="visually-hidden">To The Moon — Lista 1</h1>
+        <div class="hero-top">
+          <span class="eyebrow">Elezioni rappresentanti d'istituto</span>
+          <p class="hero-sub">Liceo "Cristoforo Colombo" — Marigliano &amp; San Vitaliano. Otto candidati, un solo obiettivo: portare la voce degli studenti più in alto che mai.</p>
+          <p class="hero-motto">"Punta alla luna: mal che vada, avrai camminato tra le stelle."</p>
+        </div>
+        <div class="hero-bottom">
+          <div class="hero-cta">
+            <a href="#programma" class="btn btn-primary">Scopri il programma</a>
+            <a href="#candidati" class="btn btn-ghost">Conosci la squadra</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="page-bg">
+  <section id="programma" class="trajectory">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="k">Missione</span>
+        <h2>Il programma elettorale</h2>
+        <p>Dieci punti concreti, ciascuno seguito da chi se ne occuperà in prima persona.</p>
+      </div>
+      <div class="programma-list">
+
+        <details class="punto">
+          <summary><span class="idx">01</span><h3>La nostra settimana dello studente</h3><span class="chevron">▾</span></summary>
+          <div class="body">
+            <p>Riproporremo la Settimana dello Studente a dicembre (8:00–12:00). Le prime 2 ore per ripasso e consolidamento, senza interrogazioni né verifiche; le ultime 2 ore per laboratori e attività gestite da noi studenti.</p>
+            <div class="refs"><span class="chip">Vincenzo Piscopo</span></div>
+          </div>
+        </details>
+
+        <details class="punto">
+          <summary><span class="idx">02</span><h3>Sportello d'ascolto digitale</h3><span class="chevron">▾</span></summary>
+          <div class="body">
+            <p>Un servizio anonimo integrato nel sito della scuola per segnalare disagi, bullismo e cyberbullismo. I dati raccolti permetteranno l'intervento di esperti per tutelare tutti gli studenti.</p>
+            <div class="refs"><span class="chip">Magda Penna</span></div>
+          </div>
+        </details>
+
+        <details class="punto">
+          <summary><span class="idx">03</span><h3>Valorizziamo la nostra arte</h3><span class="chevron">▾</span></summary>
+          <div class="body">
+            <p>Azzeriamo le distanze tra lo Scientifico di Marigliano e l'Artistico di San Vitaliano: progetti d'istituto condivisi per valorizzare l'arte, le opere e il talento della sede staccata.</p>
+            <div class="refs"><span class="chip">Antonio Sena</span></div>
+          </div>
+        </details>
+
+        <details class="punto">
+          <summary><span class="idx">04</span><h3>Immaturo</h3><span class="chevron">▾</span></summary>
+          <div class="body">
+            <p>Collaborazione con l'associazione culturale giovanile IMMATURO per organizzare eventi e attività durante tutto l'anno e valorizzare i nuovi spazi in fase di realizzazione nella scuola.</p>
+            <div class="refs"><span class="chip">Antonio Vivolo</span></div>
+          </div>
+        </details>
+
+        <details class="punto">
+          <summary><span class="idx">05</span><h3>Distributore d'acqua</h3><span class="chevron">▾</span></summary>
+          <div class="body">
+            <p>Ci batteremo con fermezza per far installare distributori d'acqua (e snack) all'interno dell'istituto: un servizio essenziale per il benessere quotidiano di tutti.</p>
+            <div class="refs"><span class="chip">Federica Cucca</span></div>
+          </div>
+        </details>
+
+        <details class="punto">
+          <summary><span class="idx">06</span><h3>Ospite speciale</h3><span class="chevron">▾</span></summary>
+          <div class="body">
+            <p>Sulla scia dell'evento con Ntò (ex Co'Sang), lavoreremo per portare un grande ospite dal mondo della musica durante l'ultima assemblea d'istituto, per chiudere l'anno in grande.</p>
+            <div class="refs"><span class="chip">Antonio Vivolo</span></div>
+          </div>
+        </details>
+
+        <details class="punto">
+          <summary><span class="idx">07</span><h3>Progetto scuole unite</h3><span class="chevron">▾</span></summary>
+          <div class="body">
+            <p>Una rete di collaborazione con gli altri istituti di Marigliano e dintorni (Mario Rossi-Doria, Ferraris) per organizzare iniziative, dibattiti ed eventi interscolastici condivisi.</p>
+            <div class="refs"><span class="chip">Antonio Vivolo</span></div>
+          </div>
+        </details>
+
+        <details class="punto">
+          <summary><span class="idx">08</span><h3>Eventi e tornei</h3><span class="chevron">▾</span></summary>
+          <div class="body">
+            <p>Serate e feste in discoteca, tornei sportivi interni (Biennio, Triennio, d'Istituto) e un grande Torneo Interscolastico contro la scuola Mario Rossi-Doria.</p>
+            <div class="refs"><span class="chip">Vincenzo Piscopo</span></div>
+          </div>
+        </details>
+
+        <details class="punto">
+          <summary><span class="idx">09</span><h3>Assemblea classi parallele</h3><span class="chevron">▾</span></summary>
+          <div class="body">
+            <p>Un'ora in Auditorium dedicata al confronto tra Rappresentanti d'Istituto e Rappresentanti di Classe, per raccogliere e risolvere davvero le problematiche emerse in ogni classe.</p>
+            <div class="refs"><span class="chip">Carlo Esposito</span></div>
+          </div>
+        </details>
+
+        <details class="punto">
+          <summary><span class="idx">10</span><h3>Laboratori e seminari</h3><span class="chevron">▾</span></summary>
+          <div class="body">
+            <p>Seminari e workshop su temi d'attualità e politica insieme all'associazione IMMATURO, con ospiti e figure esterne — come l'incontro dello scorso anno con Francesco Emilio Borrelli.</p>
+            <div class="refs"><span class="chip">Simone Signoriello</span></div>
+          </div>
+        </details>
+
+      </div>
+    </div>
+  </section>
+
+  <section id="candidati" class="trajectory">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="k">Equipaggio</span>
+        <h2>I candidati della Lista 1</h2>
+        <p>Otto studenti, un solo equipaggio pronto al lancio.</p>
+      </div>
+      <div class="capolista-grid">
+
+        <div class="crew-card capolista">
+          <div class="avatar">AV</div>
+          <span class="crown">★ Capolista</span>
+          <h3>Antonio Vivolo</h3>
+          <span class="role">Capolista</span>
+          <div class="topics"><span>Immaturo</span><span>Ospite speciale</span><span>Scuole unite</span></div>
+        </div>
+
+        <div class="crew-card capolista">
+          <div class="avatar">VP</div>
+          <span class="crown">★ Capolista</span>
+          <h3>Vincenzo Piscopo</h3>
+          <span class="role">Capolista</span>
+          <div class="topics"><span>Settimana dello studente</span><span>Eventi e tornei</span></div>
+        </div>
+
+      </div>
+
+      <div class="crew-grid">
+
+        <div class="crew-card">
+          <div class="avatar">RR</div>
+          <h3>Rosa Romano</h3>
+          <span class="role">Candidata</span>
+          <div class="topics"><span>In aggiornamento</span></div>
+        </div>
+
+        <div class="crew-card">
+          <div class="avatar">CE</div>
+          <h3>Carlo Esposito</h3>
+          <span class="role">Candidato</span>
+          <div class="topics"><span>Assemblea classi parallele</span></div>
+        </div>
+
+        <div class="crew-card">
+          <div class="avatar">MP</div>
+          <h3>Magda Penna</h3>
+          <span class="role">Candidata</span>
+          <div class="topics"><span>Sportello d'ascolto</span></div>
+        </div>
+
+        <div class="crew-card">
+          <div class="avatar">FC</div>
+          <h3>Federica Cucca</h3>
+          <span class="role">Candidata</span>
+          <div class="topics"><span>Distributore d'acqua</span></div>
+        </div>
+
+        <div class="crew-card">
+          <div class="avatar">SS</div>
+          <h3>Simone Signoriello</h3>
+          <span class="role">Candidato</span>
+          <div class="topics"><span>Laboratori e seminari</span></div>
+        </div>
+
+        <div class="crew-card">
+          <div class="avatar">AS</div>
+          <h3>Antonio Sena</h3>
+          <span class="role">Candidato</span>
+          <div class="topics"><span>Arte e sede staccata</span></div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <div class="motto-band">
+    <p>Punta alla <b>luna</b>: mal che vada, avrai camminato <b>tra le stelle</b>.</p>
+  </div>
+
+  <section id="contatti" class="contatti">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="k">Mission control</span>
+        <h2>Resta in contatto</h2>
+        <p>Seguici per aggiornamenti, eventi e tutte le novità della campagna.</p>
+      </div>
+      <a href="https://www.instagram.com/lista_1_to.the.moon_" class="ig-link" target="_blank" rel="noopener">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.6"/>
+          <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.6"/>
+          <circle cx="17.3" cy="6.7" r="1.1" fill="currentColor"/>
+        </svg>
+        @lista_1_to.the.moon_
+      </a>
+    </div>
+  </section>
+  </div>
+</main>
+
+<footer>
+  Lista 1 — To The Moon · Liceo "Cristoforo Colombo", Marigliano &amp; San Vitaliano
+</footer>
+
+<script>
+  (function () {
+    var nav = document.getElementById('siteNav');
+    var THRESHOLD = 40;
+    function onScroll() {
+      nav.classList.toggle('scrolled', window.scrollY > THRESHOLD);
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  })();
+</script>
+</body>
+</html>
