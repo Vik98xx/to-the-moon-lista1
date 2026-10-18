@@ -150,10 +150,11 @@
       background-color: var(--bg);
     }
     .page-bg::before {
-      /* same technique as the mobile background: the image tiles every
-         168.63vw (its own height/width ratio), with a matching dark
-         gradient repeating at the exact same height so it always lands
-         right on the seam between one copy and the next. */
+      /* same technique as the mobile background, but the image is capped at
+         its own native resolution (966x1629) instead of stretched to fill
+         the viewport width — on a desktop monitor that stretch is what was
+         softening it. Past 966px of width the solid --bg color (which
+         already matches the image's background) just continues seamlessly. */
       content: "";
       position: absolute;
       inset: -30px;
@@ -163,7 +164,7 @@
         url('63fc780c-83cf-44d4-94f9-41b73020bba7.png');
       background-repeat: repeat-y, repeat-y;
       background-position: top center, top center;
-      background-size: 100% 168.63vw, 100% 168.63vw;
+      background-size: 100% 1629px, 966px 1629px;
       filter: blur(3px);
     }
   }
