@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
+<script>document.documentElement.classList.add('js');</script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>To The Moon — Lista 1</title>
@@ -11,6 +12,15 @@
 <meta name="apple-mobile-web-app-title" content="To The Moon">
 <meta name="theme-color" content="#0b0e1a">
 <meta name="description" content="Lista 1 — To The Moon. Candidati rappresentanti d'istituto, Liceo Cristoforo Colombo, Marigliano e San Vitaliano.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="To The Moon — Lista 1">
+<meta property="og:description" content="Candidati rappresentanti d'istituto, Liceo Cristoforo Colombo — Marigliano &amp; San Vitaliano.">
+<meta property="og:image" content="https://to-the-moon-lista1.netlify.app/og-image.jpg">
+<meta property="og:url" content="https://to-the-moon-lista1.netlify.app/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="To The Moon — Lista 1">
+<meta name="twitter:description" content="Candidati rappresentanti d'istituto, Liceo Cristoforo Colombo — Marigliano &amp; San Vitaliano.">
+<meta name="twitter:image" content="https://to-the-moon-lista1.netlify.app/og-image.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;600;700;800;900&family=Rajdhani:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -138,7 +148,7 @@
       z-index: 0;
       background-image:
         linear-gradient(180deg, var(--bg) 0%, transparent 14%, transparent 86%, var(--bg) 100%),
-        url('sfondotothemoon.png');
+        url('sfondotothemoon.webp');
       background-repeat: repeat-y, repeat-y;
       background-position: top center, top center;
       background-size: 100% 296.84vw, 100% 296.84vw;
@@ -160,7 +170,7 @@
       z-index: 0;
       background-image:
         linear-gradient(180deg, var(--bg) 0%, transparent 14%, transparent 86%, var(--bg) 100%),
-        url('sfondo-desktop.png');
+        url('sfondo-desktop.webp');
       background-repeat: repeat-y, repeat-y;
       background-position: top center, top center;
       background-size: 100% 207.18vw, 100% 207.18vw;
@@ -659,13 +669,41 @@
     border-top: 1px solid var(--line);
   }
 
-  @media (prefers-reduced-motion: no-preference) {
-    .reveal { animation: rise .7s ease both; }
+  /* Scroll reveal: progressive enhancement — without the 'js' class (JS disabled
+     or IntersectionObserver unsupported) everything just renders normally. */
+  html.js .reveal {
+    opacity: 0;
+    transform: translateY(18px);
+    /* background/border-color here too: this rule has higher specificity than
+       .punto's own (because of the .reveal class), so it must carry both
+       sets of transitions or .punto's hover/open fade would get clobbered */
+    transition: opacity .7s cubic-bezier(.16,.84,.44,1), transform .7s cubic-bezier(.16,.84,.44,1), background .2s ease, border-color .2s ease;
   }
-  @keyframes rise {
-    from { opacity: 0; transform: translateY(14px); }
-    to { opacity: 1; transform: translateY(0); }
+  html.js .reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
   }
+  @media (prefers-reduced-motion: reduce) {
+    html.js .reveal { opacity: 1; transform: none; transition: none; }
+  }
+  .programma-list .punto:nth-child(1) { transition-delay: 0ms; }
+  .programma-list .punto:nth-child(2) { transition-delay: 40ms; }
+  .programma-list .punto:nth-child(3) { transition-delay: 80ms; }
+  .programma-list .punto:nth-child(4) { transition-delay: 120ms; }
+  .programma-list .punto:nth-child(5) { transition-delay: 160ms; }
+  .programma-list .punto:nth-child(6) { transition-delay: 200ms; }
+  .programma-list .punto:nth-child(7) { transition-delay: 240ms; }
+  .programma-list .punto:nth-child(8) { transition-delay: 280ms; }
+  .programma-list .punto:nth-child(9) { transition-delay: 320ms; }
+  .programma-list .punto:nth-child(10) { transition-delay: 360ms; }
+  .capolista-grid .crew-card:nth-child(1) { transition-delay: 0ms; }
+  .capolista-grid .crew-card:nth-child(2) { transition-delay: 90ms; }
+  .crew-grid .crew-card:nth-child(1) { transition-delay: 0ms; }
+  .crew-grid .crew-card:nth-child(2) { transition-delay: 60ms; }
+  .crew-grid .crew-card:nth-child(3) { transition-delay: 120ms; }
+  .crew-grid .crew-card:nth-child(4) { transition-delay: 180ms; }
+  .crew-grid .crew-card:nth-child(5) { transition-delay: 240ms; }
+  .crew-grid .crew-card:nth-child(6) { transition-delay: 300ms; }
 
   @media (max-width: 899px) {
     /* tighter rhythm so the content stays within one pass of the background image */
@@ -762,77 +800,77 @@
   <div class="page-bg">
   <section id="programma" class="trajectory">
     <div class="wrap">
-      <div class="section-head">
+      <div class="section-head reveal">
         <span class="k">Missione</span>
         <h2>Il programma elettorale</h2>
         <p>Dieci punti concreti, ciascuno seguito da chi se ne occuperà in prima persona.</p>
       </div>
       <div class="programma-list">
 
-        <details class="punto">
+        <details class="punto reveal">
           <summary><span class="idx">01</span><h3>La nostra settimana dello studente</h3><span class="chevron">▾</span></summary>
           <div class="body">
             <p>Riproporremo la Settimana dello Studente a dicembre (8:00–12:00). Le prime 2 ore per ripasso e consolidamento, senza interrogazioni né verifiche; le ultime 2 ore per laboratori e attività gestite da noi studenti.</p>
           </div>
         </details>
 
-        <details class="punto">
+        <details class="punto reveal">
           <summary><span class="idx">02</span><h3>Sportello d'ascolto digitale</h3><span class="chevron">▾</span></summary>
           <div class="body">
             <p>Un link anonimo, accessibile a studenti, professori e genitori, con un questionario in due fasi: alcune domande base per inquadrare la situazione, poi la scelta se si tratta solo di uno sfogo o se serve essere indirizzati verso il 1522 (numero nazionale anti-violenza e stalking) o verso una denuncia diretta ai Carabinieri.</p>
           </div>
         </details>
 
-        <details class="punto">
+        <details class="punto reveal">
           <summary><span class="idx">03</span><h3>Valorizziamo la nostra arte</h3><span class="chevron">▾</span></summary>
           <div class="body">
             <p>Azzeriamo le distanze tra lo Scientifico di Marigliano e l'Artistico di San Vitaliano: progetti d'istituto condivisi per valorizzare l'arte, le opere e il talento della sede staccata.</p>
           </div>
         </details>
 
-        <details class="punto">
+        <details class="punto reveal">
           <summary><span class="idx">04</span><h3>Immaturo</h3><span class="chevron">▾</span></summary>
           <div class="body">
             <p>Collaborazione con l'associazione culturale giovanile IMMATURO: ospiti a scuola (personaggi pubblici, influencer, politici, comici) e attività diverse dal solito, come interviste divertenti durante le assemblee, per vivere l'assemblea come qualcosa in più di una semplice mattinata fuori dalle lezioni.</p>
           </div>
         </details>
 
-        <details class="punto">
+        <details class="punto reveal">
           <summary><span class="idx">05</span><h3>Distributore d'acqua</h3><span class="chevron">▾</span></summary>
           <div class="body">
             <p>Ci batteremo con fermezza per far installare distributori d'acqua (e snack) all'interno dell'istituto: un servizio essenziale per il benessere quotidiano di tutti.</p>
           </div>
         </details>
 
-        <details class="punto">
+        <details class="punto reveal">
           <summary><span class="idx">06</span><h3>Ospite speciale</h3><span class="chevron">▾</span></summary>
           <div class="body">
             <p>Sulla scia dell'evento con Ntò (ex Co'Sang), lavoreremo per portare un grande ospite dal mondo della musica durante l'ultima assemblea d'istituto, per chiudere l'anno in grande.</p>
           </div>
         </details>
 
-        <details class="punto">
+        <details class="punto reveal">
           <summary><span class="idx">07</span><h3>Progetto scuole unite</h3><span class="chevron">▾</span></summary>
           <div class="body">
             <p>Una rete di collaborazione con gli altri istituti di Marigliano e dintorni (Mario Rossi-Doria, Ferraris) e, grazie al nostro sponsor Only for School, anche con le scuole di Nola, per organizzare iniziative, dibattiti ed eventi interscolastici condivisi.</p>
           </div>
         </details>
 
-        <details class="punto">
+        <details class="punto reveal">
           <summary><span class="idx">08</span><h3>Eventi e tornei</h3><span class="chevron">▾</span></summary>
           <div class="body">
             <p>Non partiamo da zero: la festa "Back to School" ha già portato insieme circa 350 ragazzi tra Colombo e Rossi-Doria, e i tornei di Biennio e Triennio degli scorsi anni hanno avuto grande successo, coinvolgendo anche persone esterne alla scuola. Quest'anno vogliamo continuare con nuovi tornei, nuove serate e la tradizionale Partita del Cuore tra professori e alunni.</p>
           </div>
         </details>
 
-        <details class="punto">
+        <details class="punto reveal">
           <summary><span class="idx">09</span><h3>Assemblea classi parallele</h3><span class="chevron">▾</span></summary>
           <div class="body">
             <p>Le assemblee d'istituto classiche, con troppi studenti in uno spazio enorme, rendevano difficile un vero dialogo. Per questo proporremo alla preside incontri in anfiteatro tra Rappresentanti d'Istituto e Rappresentanti di Classe, per classi parallele: uno spazio più piccolo dove gli studenti possano davvero relazionarsi con noi, esporre i problemi reali e cercare insieme una soluzione.</p>
           </div>
         </details>
 
-        <details class="punto">
+        <details class="punto reveal">
           <summary><span class="idx">10</span><h3>Laboratori e seminari</h3><span class="chevron">▾</span></summary>
           <div class="body">
             <p>Collegato alla nostra Settimana dello Studente: oltre ai laboratori già attivi in questi anni (sportivo, fotografia, cineforum), ne aggiungeremo di nuovi — musicale, teatrale e altri proposti direttamente dagli studenti — con il supporto di tutor esterni o interni alla scuola, come professori specializzati in un determinato ambito.</p>
@@ -845,21 +883,21 @@
 
   <section id="candidati" class="trajectory">
     <div class="wrap">
-      <div class="section-head">
+      <div class="section-head reveal">
         <span class="k">Equipaggio</span>
         <h2>I candidati della Lista 1</h2>
         <p>Otto studenti, un solo equipaggio pronto al lancio.</p>
       </div>
       <div class="capolista-grid">
 
-        <div class="crew-card capolista">
+        <div class="crew-card capolista reveal">
           <div class="avatar">AV</div>
           <span class="crown">★ Capolista</span>
           <h3>Antonio Vivolo</h3>
           <span class="role">Capolista</span>
         </div>
 
-        <div class="crew-card capolista">
+        <div class="crew-card capolista reveal">
           <div class="avatar">VP</div>
           <span class="crown">★ Capolista</span>
           <h3>Vincenzo Piscopo</h3>
@@ -870,37 +908,37 @@
 
       <div class="crew-grid">
 
-        <div class="crew-card">
+        <div class="crew-card reveal">
           <div class="avatar">RR</div>
           <h3>Rosa Romano</h3>
           <span class="role">Candidata</span>
         </div>
 
-        <div class="crew-card">
+        <div class="crew-card reveal">
           <div class="avatar">CE</div>
           <h3>Carlo Esposito</h3>
           <span class="role">Candidato</span>
         </div>
 
-        <div class="crew-card">
+        <div class="crew-card reveal">
           <div class="avatar">MP</div>
           <h3>Magda Penna</h3>
           <span class="role">Candidata</span>
         </div>
 
-        <div class="crew-card">
+        <div class="crew-card reveal">
           <div class="avatar">FC</div>
           <h3>Federica Cucca</h3>
           <span class="role">Candidata</span>
         </div>
 
-        <div class="crew-card">
+        <div class="crew-card reveal">
           <div class="avatar">SS</div>
           <h3>Simone Signoriello</h3>
           <span class="role">Candidato</span>
         </div>
 
-        <div class="crew-card">
+        <div class="crew-card reveal">
           <div class="avatar">AS</div>
           <h3>Antonio Sena</h3>
           <span class="role">Candidato</span>
@@ -910,13 +948,13 @@
     </div>
   </section>
 
-  <div class="motto-band">
+  <div class="motto-band reveal">
     <p>Punta alla <b>luna</b>: mal che vada, avrai camminato <b>tra le stelle</b>.</p>
   </div>
 
   <section id="contatti" class="contatti">
     <div class="wrap">
-      <div class="section-head">
+      <div class="section-head reveal">
         <span class="k">Mission control</span>
         <h2>Resta in contatto</h2>
         <p>Seguici per aggiornamenti, eventi e tutte le novità della campagna.</p>
@@ -946,6 +984,25 @@
     }
     window.addEventListener('scroll', onScroll, { passive: true });
     onScroll();
+  })();
+</script>
+<script>
+  (function () {
+    var items = document.querySelectorAll('.reveal');
+    if (!items.length) return;
+    if (!('IntersectionObserver' in window)) {
+      items.forEach(function (el) { el.classList.add('is-visible'); });
+      return;
+    }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+    items.forEach(function (el) { io.observe(el); });
   })();
 </script>
 </body>
