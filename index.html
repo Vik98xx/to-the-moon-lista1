@@ -202,7 +202,7 @@
     nav { opacity: 1; pointer-events: auto; }
   }
   nav:not(.scrolled) .navlinks a {
-    text-shadow: 0 1px 10px color-mix(in srgb, var(--bg) 85%, transparent), 0 1px 2px color-mix(in srgb, var(--bg) 95%, transparent), 0 0 8px color-mix(in srgb, #8fd8ff 45%, transparent);
+    text-shadow: 0 1px 10px color-mix(in srgb, var(--bg) 85%, transparent), 0 0 4px #8fd8ff, 0 0 9px color-mix(in srgb, #4fb8ff 70%, transparent);
   }
   nav:not(.scrolled) .brand {
     text-shadow: 0 1px 10px color-mix(in srgb, var(--bg) 85%, transparent), 0 0 4px #8fd8ff, 0 0 9px color-mix(in srgb, #4fb8ff 70%, transparent);
@@ -216,6 +216,18 @@
   }
   @media (min-width: 900px) {
     .nav-inner { max-width: none; padding-inline: clamp(24px, 4vw, 56px); }
+    .navlinks { gap: clamp(20px, 2.6vw, 40px); font-size: 1.05rem; }
+    .navlinks a {
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 600;
+      letter-spacing: .03em;
+      color: #eaf6ff;
+      text-shadow: 0 0 4px #8fd8ff, 0 0 9px color-mix(in srgb, #4fb8ff 70%, transparent);
+    }
+    .navlinks a:hover {
+      color: var(--gold);
+      text-shadow: 0 0 5px var(--gold), 0 0 11px color-mix(in srgb, var(--gold) 70%, transparent);
+    }
   }
   .brand {
     display: flex;
