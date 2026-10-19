@@ -634,11 +634,18 @@
   .contatti {
     text-align: center;
   }
+  .social-links {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    margin-top: 22px;
+  }
   .ig-link {
     display: inline-flex;
     align-items: center;
-    gap: 10px;
-    margin-top: 22px;
+    gap: 12px;
     padding: 14px 28px;
     border-radius: 999px;
     background: var(--surface);
@@ -647,6 +654,7 @@
     text-decoration: none;
     font-size: .95rem;
   }
+  .ig-link svg { flex-shrink: 0; }
   .ig-link:hover { border-color: var(--gold-dim); }
   .sponsors {
     margin-top: 40px;
@@ -969,16 +977,24 @@
       <div class="section-head reveal">
         <span class="k">Mission control</span>
         <h2>Resta in contatto</h2>
-        <p>Seguici per aggiornamenti, eventi e tutte le novità della campagna.</p>
+        <p>Seguici sui social.</p>
       </div>
-      <a href="https://www.instagram.com/lista_1_to.the.moon_" class="ig-link" target="_blank" rel="noopener">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.6"/>
-          <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.6"/>
-          <circle cx="17.3" cy="6.7" r="1.1" fill="currentColor"/>
-        </svg>
-        @lista_1_to.the.moon_
-      </a>
+      <div class="social-links">
+        <a href="https://www.instagram.com/lista_1_to.the.moon_" class="ig-link" target="_blank" rel="noopener">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.6"/>
+            <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.6"/>
+            <circle cx="17.3" cy="6.7" r="1.1" fill="currentColor"/>
+          </svg>
+          Lista 1 To The Moon
+        </a>
+        <a href="https://www.tiktok.com/@lista1_tothemoon" class="ig-link" target="_blank" rel="noopener">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M16.6 5.2c.8.9 1.9 1.5 3.2 1.6v2.9c-1.3 0-2.6-.4-3.7-1.1v6.1c0 3-2.4 5.3-5.3 5.3s-5.3-2.4-5.3-5.3 2.4-5.3 5.3-5.3c.3 0 .6 0 .9.1v3c-.3-.1-.6-.2-.9-.2-1.4 0-2.5 1.1-2.5 2.5s1.1 2.5 2.5 2.5 2.5-1.1 2.5-2.5V3h2.9c0 .8.2 1.6.4 2.2z" fill="currentColor"/>
+          </svg>
+          Lista 1 To The Moon
+        </a>
+      </div>
       <div class="sponsors">
         <p class="sponsors-thanks">Un grazie speciale al nostro sponsor <b>Only for School</b> e alla nostra partner <b>IMMATURO</b></p>
       </div>
