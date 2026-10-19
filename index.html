@@ -626,6 +626,30 @@
     font-size: .95rem;
   }
   .ig-link:hover { border-color: var(--gold-dim); }
+  .sponsors {
+    margin-top: 40px;
+    padding-top: 28px;
+    border-top: 1px solid var(--line);
+  }
+  .sponsors-thanks {
+    font-size: .85rem;
+    color: var(--ink-dim);
+  }
+  .sponsors-thanks b { color: var(--gold); font-weight: 600; }
+  .sponsor-logos {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 28px;
+    margin-top: 16px;
+    flex-wrap: wrap;
+  }
+  .sponsor-logos img {
+    height: 36px;
+    width: auto;
+    opacity: .85;
+    filter: grayscale(.2);
+  }
 
   footer {
     text-align: center;
@@ -755,7 +779,7 @@
         <details class="punto">
           <summary><span class="idx">02</span><h3>Sportello d'ascolto digitale</h3><span class="chevron">▾</span></summary>
           <div class="body">
-            <p>Un servizio anonimo integrato nel sito della scuola per segnalare disagi, bullismo e cyberbullismo. I dati raccolti permetteranno l'intervento di esperti per tutelare tutti gli studenti.</p>
+            <p>Un link anonimo, accessibile a studenti, professori e genitori, con un questionario in due fasi: alcune domande base per inquadrare la situazione, poi la scelta se si tratta solo di uno sfogo o se serve essere indirizzati verso il 1522 (numero nazionale anti-violenza e stalking) o verso una denuncia diretta ai Carabinieri.</p>
           </div>
         </details>
 
@@ -769,7 +793,7 @@
         <details class="punto">
           <summary><span class="idx">04</span><h3>Immaturo</h3><span class="chevron">▾</span></summary>
           <div class="body">
-            <p>Collaborazione con l'associazione culturale giovanile IMMATURO per organizzare eventi e attività durante tutto l'anno e valorizzare i nuovi spazi in fase di realizzazione nella scuola.</p>
+            <p>Collaborazione con l'associazione culturale giovanile IMMATURO: ospiti a scuola (personaggi pubblici, influencer, politici, comici) e attività diverse dal solito, come interviste divertenti durante le assemblee, per vivere l'assemblea come qualcosa in più di una semplice mattinata fuori dalle lezioni.</p>
           </div>
         </details>
 
@@ -790,7 +814,7 @@
         <details class="punto">
           <summary><span class="idx">07</span><h3>Progetto scuole unite</h3><span class="chevron">▾</span></summary>
           <div class="body">
-            <p>Una rete di collaborazione con gli altri istituti di Marigliano e dintorni (Mario Rossi-Doria, Ferraris) per organizzare iniziative, dibattiti ed eventi interscolastici condivisi.</p>
+            <p>Una rete di collaborazione con gli altri istituti di Marigliano e dintorni (Mario Rossi-Doria, Ferraris) e, grazie al nostro sponsor Only for School, anche con le scuole di Nola, per organizzare iniziative, dibattiti ed eventi interscolastici condivisi.</p>
           </div>
         </details>
 
@@ -905,14 +929,13 @@
         </svg>
         @lista_1_to.the.moon_
       </a>
+      <div class="sponsors">
+        <p class="sponsors-thanks">Un grazie speciale al nostro sponsor <b>Only for School</b> e alla nostra partner <b>IMMATURO</b></p>
+      </div>
     </div>
   </section>
   </div>
 </main>
-
-<footer>
-  Lista 1 — To The Moon · Liceo "Cristoforo Colombo", Marigliano &amp; San Vitaliano
-</footer>
 
 <script>
   (function () {
